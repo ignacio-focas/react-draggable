@@ -1,16 +1,16 @@
 .itemsContainer{
   color: black;
-  position: relative;
+  position: relative !important;
   background-image: url('./assets/Loesch.svg') ;
   background-repeat: no-repeat;
   background-position: center;
-  width: 100%;
+  width: 50%;
   height: 80vh;
   border: 4px solid orange;
 }
 
 .itemDrag{
-  position: relative;
+  position: absolute !important;
   background-color: coral !important;
   color: white;
   padding: 0.5em 1em;

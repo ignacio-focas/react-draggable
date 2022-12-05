@@ -6,10 +6,15 @@ import { Button, Menu } from 'semantic-ui-react';
 
 function App() {
 
-  const items= ["item 1", "item 2", "item 3", "item 4"];
-  const [positions, setPositions] = useState({})
-  const [hasLoaded, setHasLoaded] = useState(false)
-  const [disableDrag, setDisableDrag] = useState(true)
+  const items= [
+    {title:"item 1", id:1}, 
+    {title:"item 2", id:2}, 
+    {title:"item 3", id:3}, 
+    {title:"item 4", id:4}
+  ];
+  const [positions, setPositions] = useState({});
+  const [hasLoaded, setHasLoaded] = useState(false);
+  const [disableDrag, setDisableDrag] = useState(true);
 
   useEffect(()=>{
     const existingButtonPositions = JSON.parse(localStorage.getItem('positions_button'))
@@ -47,17 +52,17 @@ function App() {
       <div className='itemsContainer'>
           {items.map((item)=>{
             return(
-              <Draggable disabled={disableDrag} key={item[5]} defaultPosition={
+              <Draggable disabled={disableDrag} key={item.id} defaultPosition={
                 positions === null ? 
                 {x:0, y:0} 
-                : !positions[item[5]] ? 
+                : !positions[item.id] ? 
                 {x: 0, y: 0} 
-                :{x:positions[item[5]].x, y: positions[item[5]].y} 
+                :{x:positions[item.id].x, y: positions[item.id].y} 
                 }
                 onStop={handleStop}
                 bounds='parent'>
               
-                <Button id={item[5]} className='itemDrag' >{item}</Button>
+                <Button id={item.id} className='itemDrag' >{item.title}</Button>
                 
               </Draggable>
             )
