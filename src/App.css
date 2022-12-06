@@ -20,3 +20,8 @@
 .ui.menu{
   min-height: 4.65em;
 }
+
+.container-imagen svg{
+  min-width: 771.250px;
+  min-height: 569.275px;
+}
