@@ -1,14 +1,3 @@
-.itemsContainer{
-  color: black;
-  position: relative !important;
-  background-image: url('./assets/Loesch.svg') ;
-  background-repeat: no-repeat;
-  background-position: center;
-  width: 50%;
-  height: 80vh;
-  border: 4px solid orange;
-}
-
 .itemDrag{
   position: absolute !important;
   background-color: coral !important;
@@ -17,4 +6,17 @@
   width: 100px;
   margin: 0.3em;
   cursor: move !important;
+}
+
+.container-imagen{
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  border: 4px solid orange;
+  position: relative;
+
+}
+
+.container-imagen>svg{
+  width: 25%;
 }
