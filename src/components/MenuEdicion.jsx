@@ -1,13 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Checkbox, Label, Menu } from "semantic-ui-react";
 import { imagenes } from "./../assets/NombresImagenes";
 
 function MenuEdicion(props) {
-  const { handleEdicion, handleClickImagen, verSelectorImagenes } = props;
+  const { handleEdicion, handleClickImagen, verSelectorImagenes, color } = props;
+
   return (
     <Menu>
       <Menu.Item>
-        <Label content="Modo Edición" color="teal" />
+        <Label content="Modo Edición" color={color} />
         <Checkbox toggle onChange={() => handleEdicion()} />
       </Menu.Item>
       {verSelectorImagenes && (

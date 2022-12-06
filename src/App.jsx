@@ -17,6 +17,7 @@ function App() {
   const [disableDrag, setDisableDrag] = useState(true);
   const [verSelectorImagenes, setVerSelectorImagenes] = useState(false);
   const [imagen, setImagen] = useState("");
+  const [color, setColor] = useState("grey");
 
   useEffect(() => {
     const existingButtonPositions = JSON.parse(
@@ -36,10 +37,15 @@ function App() {
   }
 
   function toggleModoEdicion() {
-    disableDrag ? setDisableDrag(false) : setDisableDrag(true);
-    verSelectorImagenes
-      ? setVerSelectorImagenes(false)
-      : setVerSelectorImagenes(true);
+    if (disableDrag) {
+      setDisableDrag(false);
+      setColor("teal");
+      setVerSelectorImagenes(true);
+    } else {
+      setDisableDrag(true);
+      setColor("grey");
+      setVerSelectorImagenes(false);
+    }
   }
 
   useEffect(() => {
@@ -52,6 +58,7 @@ function App() {
         handleEdicion={() => toggleModoEdicion()}
         handleClickImagen={(img) => setImagen(img)}
         verSelectorImagenes={verSelectorImagenes}
+        color={color}
       />
 
       <ContainerImagen
