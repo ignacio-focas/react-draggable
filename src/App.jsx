@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 import Draggable from "react-draggable";
-import { imagenes } from "./assets/NombresImagenes";
-import { Button, Menu, Checkbox, Label } from "semantic-ui-react";
+import { Button } from "semantic-ui-react";
 import ContainerImagen from "./components/ContainerImagen";
+import MenuEdicion from "./components/MenuEdicion";
 
 function App() {
   const items = [
@@ -48,30 +48,12 @@ function App() {
 
   return hasLoaded ? (
     <>
-      <Menu>
-        <Menu.Item>
-          <Label content="Modo Edición" color="teal" />
-          <Checkbox toggle onChange={() => toggleModoEdicion()} />
-        </Menu.Item>
-        {verSelectorImagenes && (
-          <Menu.Item>
-            <Button.Group>
-              <Button onClick={() => setImagen(imagenes.ENVOLVEDORA)}>
-                Envolvedora
-              </Button>
-              <Button onClick={() => setImagen(imagenes.ESTUCHADORA)}>
-                Estuchadora
-              </Button>
-              <Button onClick={() => setImagen(imagenes.COMPRIMIDORA)}>
-                Comprimidora
-              </Button>
-              <Button onClick={() => setImagen(imagenes.ENTUBADORA)}>
-                Entubadora
-              </Button>
-            </Button.Group>
-          </Menu.Item>
-        )}
-      </Menu>
+      <MenuEdicion
+        handleEdicion={() => toggleModoEdicion()}
+        handleClickImagen={(img) => setImagen(img)}
+        verSelectorImagenes={verSelectorImagenes}
+      />
+
       <ContainerImagen
         imagen={imagen}
         hasLoaded={hasLoaded}
