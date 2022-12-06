@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import "./App.css";
 import Draggable from "react-draggable";
 import { imagenes } from "./assets/NombresImagenes";
-import { Button, Menu } from "semantic-ui-react";
-import ContainerImagen from "./components/common/ContainerImagen";
+import { Button, Menu, Checkbox, Label } from "semantic-ui-react";
+import ContainerImagen from "./components/ContainerImagen";
 
 function App() {
   const items = [
@@ -15,6 +15,7 @@ function App() {
   const [positions, setPositions] = useState({});
   const [hasLoaded, setHasLoaded] = useState(false);
   const [disableDrag, setDisableDrag] = useState(true);
+  const [verSelectorImagenes, setVerSelectorImagenes] = useState(false);
   const [imagen, setImagen] = useState("");
 
   useEffect(() => {
@@ -34,6 +35,13 @@ function App() {
     setPositions(dummyPositions);
   }
 
+  function toggleModoEdicion() {
+    disableDrag ? setDisableDrag(false) : setDisableDrag(true);
+    verSelectorImagenes
+      ? setVerSelectorImagenes(false)
+      : setVerSelectorImagenes(true);
+  }
+
   useEffect(() => {
     localStorage.setItem("positions_button", JSON.stringify(positions));
   }, [positions]);
@@ -42,42 +50,28 @@ function App() {
     <>
       <Menu>
         <Menu.Item>
-          <Button.Group>
-            <Button
-              onClick={() => {
-                setDisableDrag(false);
-              }}
-            >
-              Editar
-            </Button>
-            <Button.Or />
-            <Button
-              onClick={() => {
-                setDisableDrag(true);
-              }}
-            >
-              Ver
-            </Button>
-          </Button.Group>
+          <Label content="Modo Edición" color="teal" />
+          <Checkbox toggle onChange={() => toggleModoEdicion()} />
         </Menu.Item>
-        <Menu.Item>
-          <Button.Group>
-            <Button onClick={() => setImagen(imagenes.ENVOLVEDORA)}>
-              Envolvedora
-            </Button>
-            <Button onClick={() => setImagen(imagenes.ESTUCHADORA)}>
-              Estuchadora
-            </Button>
-            <Button onClick={() => setImagen(imagenes.COMPRIMIDORA)}>
-              Comprimidora
-            </Button>
-            <Button onClick={() => setImagen(imagenes.ENTUBADORA)}>
-              Entubadora
-            </Button>
-          </Button.Group>
-        </Menu.Item>
+        {verSelectorImagenes && (
+          <Menu.Item>
+            <Button.Group>
+              <Button onClick={() => setImagen(imagenes.ENVOLVEDORA)}>
+                Envolvedora
+              </Button>
+              <Button onClick={() => setImagen(imagenes.ESTUCHADORA)}>
+                Estuchadora
+              </Button>
+              <Button onClick={() => setImagen(imagenes.COMPRIMIDORA)}>
+                Comprimidora
+              </Button>
+              <Button onClick={() => setImagen(imagenes.ENTUBADORA)}>
+                Entubadora
+              </Button>
+            </Button.Group>
+          </Menu.Item>
+        )}
       </Menu>
-
       <ContainerImagen
         imagen={imagen}
         hasLoaded={hasLoaded}

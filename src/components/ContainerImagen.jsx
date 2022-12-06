@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
-import { imagenes } from "../../assets/NombresImagenes";
-import Comprimidora from "../svgComponents/Comprimidora";
-import Envolvedora from "../svgComponents/Envolvedora";
-import Entubadora from "./../svgComponents/Entubadora";
-import Estuchadora from "./../svgComponents/Estuchadora";
+import { imagenes } from "../assets/NombresImagenes";
+import Comprimidora from "./svgComponents/Comprimidora";
+import Envolvedora from "./svgComponents/Envolvedora";
+import Entubadora from "./svgComponents/Entubadora";
+import Estuchadora from "./svgComponents/Estuchadora";
 
 function ContainerImagen(props) {
-  const { imagen, children, hasLoaded, setImagen, setHasLoaded } = props;
+  const { imagen, children, setImagen, setHasLoaded } = props;
 
   useEffect(() => {
     const imagenActual = JSON.parse(
