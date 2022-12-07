@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 import Draggable from "react-draggable";
-import { Button } from "semantic-ui-react";
+import { Button, Input } from "semantic-ui-react";
 import ContainerImagen from "./components/ContainerImagen";
 import MenuEdicion from "./components/MenuEdicion";
 
@@ -18,6 +18,17 @@ function App() {
   const [verSelectorImagenes, setVerSelectorImagenes] = useState(false);
   const [imagen, setImagen] = useState("");
   const [color, setColor] = useState("grey");
+  const [dummyValues, setDummyValues] = useState({
+    Producto: "ACTRON RAP ACC cap x20 AR/UR",
+    Lote: "ARE495",
+    HoraDeInicio: "14/03/2014 11:23:19",
+    MinutosEnMarcha: 186,
+    EstucheMin: 0,
+    EstuchesConsumidos: 54395,
+    EstuchesProducidos: 54000,
+    CantDeBultos: 669,
+    CantDePaletas: 5,
+  });
 
   useEffect(() => {
     const existingButtonPositions = JSON.parse(
@@ -89,6 +100,73 @@ function App() {
           );
         })}
       </ContainerImagen>
+      <div className="container-valores">
+        <div>
+          <Draggable>
+            <Input
+              label="Producto"
+              readOnly
+              defaultValue={dummyValues.Producto}
+            />
+          </Draggable>
+          <Draggable>
+            <Input label="Lote" readOnly defaultValue={dummyValues.Lote} />
+          </Draggable>
+
+          <Draggable>
+            <Input
+              label="Hora de Inicio"
+              readOnly
+              defaultValue={dummyValues.HoraDeInicio}
+            />
+          </Draggable>
+          <Draggable>
+            <Input
+              label="Minutos en Marcha"
+              readOnly
+              defaultValue={dummyValues.MinutosEnMarcha}
+            />
+          </Draggable>
+
+          <Draggable>
+            <Input
+              label="Estuche/min"
+              readOnly
+              defaultValue={dummyValues.EstucheMin}
+            />
+          </Draggable>
+        </div>
+        <div>
+          <Draggable>
+            <Input
+              label="Estuches consumidos"
+              readOnly
+              defaultValue={dummyValues.EstuchesConsumidos}
+            />
+          </Draggable>
+          <Draggable>
+            <Input
+              label="Estuches producidos"
+              readOnly
+              defaultValue={dummyValues.EstuchesProducidos}
+            />
+          </Draggable>
+          <Draggable>
+            <Input
+              label="Cant. de Bultos"
+              readOnly
+              defaultValue={dummyValues.CantDeBultos}
+            />
+          </Draggable>
+          <Draggable>
+            <Input
+              label="Cant. de Paletas"
+              readOnly
+              defaultValue={dummyValues.CantDePaletas}
+            />
+          </Draggable>
+        </div>
+      </div>
     </>
   ) : null;
 }

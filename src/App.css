@@ -26,3 +26,27 @@
   min-width: 771.250px;
   height: 569.275px;
 }
+
+.container-valores{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 50px;
+  margin: 20px;  
+}
+
+.container-valores div{
+  display: flex;
+  flex-direction: column;
+
+}
+
+.container-valores .input{
+  margin: 10px;
+  width: 250px;
+}
+
+.container-valores input{
+  cursor: move !important;
+}
+
