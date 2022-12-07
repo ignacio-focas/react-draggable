@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { Button, Checkbox, Label, Menu } from "semantic-ui-react";
-import { imagenes } from "./../assets/NombresImagenes";
+import { imagenes } from "../assets/NombresImagenes";
 
-function MenuEdicion(props) {
-  const { handleEdicion, handleClickImagen, verSelectorImagenes, color } = props;
+function MenuEdicionTop(props) {
+  const { handleEdicion, handleClickImagen, verSelectorImagenes, color } =
+    props;
 
   return (
     <Menu>
@@ -33,4 +34,4 @@ function MenuEdicion(props) {
   );
 }
 
-export default MenuEdicion;
+export default MenuEdicionTop;

@@ -3,7 +3,8 @@ import "./App.css";
 import Draggable from "react-draggable";
 import { Button, Input } from "semantic-ui-react";
 import ContainerImagen from "./components/ContainerImagen";
-import MenuEdicion from "./components/MenuEdicion";
+import MenuEdicionTop from "./components/MenuEdicionTop";
+import MenuEdicionBottom from "./components/MenuEdicionBottom";
 
 function App() {
   const items = [
@@ -82,7 +83,7 @@ function App() {
 
   return hasLoaded ? (
     <>
-      <MenuEdicion
+      <MenuEdicionTop
         handleEdicion={() => toggleModoEdicion()}
         handleClickImagen={(img) => setImagen(img)}
         verSelectorImagenes={modoEdicion}
@@ -102,13 +103,6 @@ function App() {
                 disabled={disableDrag}
                 key={dummy.id}
                 onStop={handleStop}
-                // defaultPosition={
-                //   positions === null
-                //     ? { x: 0, y: 0 }
-                //     : !positions[dummy.id]
-                //     ? { x: 0, y: 0 }
-                //     : { x: positions[dummy.id].x, y: positions[dummy.id].y }
-                // }
                 bounds="parent"
               >
                 <Input
@@ -122,23 +116,11 @@ function App() {
           );
         })}
       </ContainerImagen>
-      {modoEdicion && (
-        <div className="container-valores">
-          {dummyValues.map((dummy) => {
-            return (
-              !dummy.mostrar && (
-                <Button
-                  key={dummy.id}
-                  id={dummy.id}
-                  content={dummy.Label}
-                  color="teal"
-                  onClick={() => toggleMostrar(dummy.id)}
-                />
-              )
-            );
-          })}
-        </div>
-      )}
+      <MenuEdicionBottom
+        modoEdicion={modoEdicion}
+        values={dummyValues}
+        handleMostrar={(id) => toggleMostrar(id)}
+      />
     </>
   ) : null;
 }
