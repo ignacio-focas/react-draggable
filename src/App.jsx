@@ -90,37 +90,39 @@ function App() {
         color={color}
       />
 
-      <ContainerImagen
-        imagen={imagen}
-        hasLoaded={hasLoaded}
-        setImagen={(img) => setImagen(img)}
-        setHasLoaded={() => setHasLoaded}
-      >
-        {dummyValues.map((dummy) => {
-          return (
-            dummy.mostrar && (
-              <Draggable
-                disabled={disableDrag}
-                key={dummy.id}
-                onStop={handleStop}
-                bounds="parent"
-              >
-                <Input
-                  id={dummy.id}
-                  label={dummy.Label}
-                  readOnly
-                  defaultValue={dummy.Value}
-                />
-              </Draggable>
-            )
-          );
-        })}
-      </ContainerImagen>
-      <MenuEdicionBottom
-        modoEdicion={modoEdicion}
-        values={dummyValues}
-        handleMostrar={(id) => toggleMostrar(id)}
-      />
+      <div style={{ display: "flex", flexDirection: "row" }}>
+        <ContainerImagen
+          imagen={imagen}
+          hasLoaded={hasLoaded}
+          setImagen={(img) => setImagen(img)}
+          setHasLoaded={() => setHasLoaded}
+        >
+          {dummyValues.map((dummy) => {
+            return (
+              dummy.mostrar && (
+                <Draggable
+                  disabled={disableDrag}
+                  key={dummy.id}
+                  onStop={handleStop}
+                  bounds="parent"
+                >
+                  <Input
+                    id={dummy.id}
+                    label={dummy.Label}
+                    readOnly
+                    defaultValue={dummy.Value}
+                  />
+                </Draggable>
+              )
+            );
+          })}
+        </ContainerImagen>
+        <MenuEdicionBottom
+          modoEdicion={modoEdicion}
+          values={dummyValues}
+          handleMostrar={(id) => toggleMostrar(id)}
+        />
+      </div>
     </>
   ) : null;
 }

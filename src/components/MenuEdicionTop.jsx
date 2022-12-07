@@ -9,12 +9,12 @@ function MenuEdicionTop(props) {
   return (
     <Menu>
       <Menu.Item>
-        <Label content="Modo Edición" color={color} />
+        <Label content="Modo Edición" color={color} size="large" />
         <Checkbox toggle onChange={() => handleEdicion()} />
       </Menu.Item>
       {verSelectorImagenes && (
         <Menu.Item>
-          <Button.Group>
+          <Button.Group color="teal">
             <Button onClick={() => handleClickImagen(imagenes.ENVOLVEDORA)}>
               Envolvedora
             </Button>
