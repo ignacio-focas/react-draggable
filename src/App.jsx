@@ -7,18 +7,11 @@ import MenuEdicionTop from "./components/MenuEdicionTop";
 import MenuEdicionBottom from "./components/MenuEdicionBottom";
 
 function App() {
-  const items = [
-    { title: "item 1", id: 1 },
-    { title: "item 2", id: 2 },
-    { title: "item 3", id: 3 },
-    { title: "item 4", id: 4 },
-  ];
   const [positions, setPositions] = useState({});
   const [hasLoaded, setHasLoaded] = useState(false);
   const [disableDrag, setDisableDrag] = useState(true);
   const [modoEdicion, setModoEdicion] = useState(false);
   const [imagen, setImagen] = useState("");
-  const [color, setColor] = useState("grey");
   const [dummyValues, setDummyValues] = useState([
     {
       Value: "ACTRON RAP ACC cap x20 AR/UR",
@@ -59,13 +52,11 @@ function App() {
   }
 
   function toggleModoEdicion() {
-    if (disableDrag) {
+    if (!modoEdicion) {
       setDisableDrag(false);
-      setColor("teal");
       setModoEdicion(true);
     } else {
       setDisableDrag(true);
-      setColor("grey");
       setModoEdicion(false);
     }
   }
@@ -87,7 +78,7 @@ function App() {
         handleEdicion={() => toggleModoEdicion()}
         handleClickImagen={(img) => setImagen(img)}
         verSelectorImagenes={modoEdicion}
-        color={color}
+        modoEdicion={modoEdicion}
       />
 
       <div style={{ display: "flex", flexDirection: "row" }}>
@@ -105,6 +96,13 @@ function App() {
                   key={dummy.id}
                   onStop={handleStop}
                   bounds="parent"
+                  defaultPosition={
+                    positions === null
+                    ? {x: 0, y: 0} :
+                    !positions[dummy.id]
+                    ? {x:0, y:0} :
+                    {x: positions[dummy.id].x, y: positions[dummy.id].y}
+                  }
                 >
                   <Input
                     id={dummy.id}

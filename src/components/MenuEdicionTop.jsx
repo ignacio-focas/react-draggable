@@ -3,13 +3,21 @@ import { Button, Checkbox, Label, Menu } from "semantic-ui-react";
 import { imagenes } from "../assets/NombresImagenes";
 
 function MenuEdicionTop(props) {
-  const { handleEdicion, handleClickImagen, verSelectorImagenes, color } =
-    props;
+  const {
+    handleEdicion,
+    handleClickImagen,
+    verSelectorImagenes,
+    modoEdicion,
+  } = props;
 
   return (
     <Menu>
       <Menu.Item>
-        <Label content="Modo Edición" color={color} size="large" />
+        <Label
+          content="Modo Edición"
+          color={modoEdicion ? "teal" : "grey"}
+          size="large"
+        />
         <Checkbox toggle onChange={() => handleEdicion()} />
       </Menu.Item>
       {verSelectorImagenes && (

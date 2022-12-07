@@ -26,6 +26,10 @@ body{
 
 }
 
+.ui.checkbox{
+  margin-left: 10px;
+}
+
 .ui.menu{
   min-height: 4.65em;
 }
