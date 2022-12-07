@@ -1,3 +1,7 @@
+body{
+  background-color: #fafafa;
+}
+
 .itemDrag{
   position: absolute !important;
   background-color: coral !important;
@@ -31,22 +35,17 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
+  flex-wrap: wrap;
   gap: 50px;
   margin: 20px;  
 }
 
-.container-valores div{
-  display: flex;
-  flex-direction: column;
-
-}
-
-.container-valores .input{
+ .container-valores .input{
   margin: 10px;
-  width: 250px;
+  width: 20%;
 }
 
 .container-valores input{
   cursor: move !important;
 }
-
+ 
