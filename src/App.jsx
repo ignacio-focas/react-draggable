@@ -15,7 +15,7 @@ function App() {
   const [positions, setPositions] = useState({});
   const [hasLoaded, setHasLoaded] = useState(false);
   const [disableDrag, setDisableDrag] = useState(true);
-  const [verSelectorImagenes, setVerSelectorImagenes] = useState(false);
+  const [modoEdicion, setModoEdicion] = useState(false);
   const [imagen, setImagen] = useState("");
   const [color, setColor] = useState("grey");
   const [dummyValues, setDummyValues] = useState([
@@ -61,11 +61,11 @@ function App() {
     if (disableDrag) {
       setDisableDrag(false);
       setColor("teal");
-      setVerSelectorImagenes(true);
+      setModoEdicion(true);
     } else {
       setDisableDrag(true);
       setColor("grey");
-      setVerSelectorImagenes(false);
+      setModoEdicion(false);
     }
   }
 
@@ -85,7 +85,7 @@ function App() {
       <MenuEdicion
         handleEdicion={() => toggleModoEdicion()}
         handleClickImagen={(img) => setImagen(img)}
-        verSelectorImagenes={verSelectorImagenes}
+        verSelectorImagenes={modoEdicion}
         color={color}
       />
 
@@ -122,21 +122,23 @@ function App() {
           );
         })}
       </ContainerImagen>
-      <div className="container-valores">
-        {dummyValues.map((dummy) => {
-          return (
-            !dummy.mostrar && (
-              <Button
-                key={dummy.id}
-                id={dummy.id}
-                content={dummy.Label}
-                color="teal"
-                onClick={() => toggleMostrar(dummy.id)}
-              />
-            )
-          );
-        })}
-      </div>
+      {modoEdicion && (
+        <div className="container-valores">
+          {dummyValues.map((dummy) => {
+            return (
+              !dummy.mostrar && (
+                <Button
+                  key={dummy.id}
+                  id={dummy.id}
+                  content={dummy.Label}
+                  color="teal"
+                  onClick={() => toggleMostrar(dummy.id)}
+                />
+              )
+            );
+          })}
+        </div>
+      )}
     </>
   ) : null;
 }
