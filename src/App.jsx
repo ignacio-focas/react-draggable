@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 import Draggable from "react-draggable";
-import { Button, Input } from "semantic-ui-react";
+import { Input } from "semantic-ui-react";
 import ContainerImagen from "./components/ContainerImagen";
 import MenuEdicionTop from "./components/MenuEdicionTop";
 import MenuEdicionBottom from "./components/MenuEdicionBottom";
 
 function App() {
   const [positions, setPositions] = useState({});
+  const [itemsVisibles, setItemsVisibles] = useState([]);
   const [hasLoaded, setHasLoaded] = useState(false);
   const [disableDrag, setDisableDrag] = useState(true);
   const [modoEdicion, setModoEdicion] = useState(false);
@@ -38,7 +39,9 @@ function App() {
     const existingButtonPositions = JSON.parse(
       localStorage.getItem("positions")
     );
+    const existingVisibles = JSON.parse(localStorage.getItem("visibles"));
     setPositions(existingButtonPositions);
+    setItemsVisibles(existingVisibles);
     setHasLoaded(true);
   }, []);
 
@@ -65,12 +68,14 @@ function App() {
     const dummy = dummyValues.find((d) => d.id === id);
     const dummyModificado = { ...dummy, mostrar: true };
     const newValues = dummyValues.filter((d) => d.id !== id);
+    setItemsVisibles(itemsVisibles.concat(dummyModificado));
     setDummyValues([...newValues, dummyModificado]);
   };
 
   useEffect(() => {
     localStorage.setItem("positions", JSON.stringify(positions));
-  }, [positions]);
+    localStorage.setItem("visibles", JSON.stringify(itemsVisibles));
+  }, [positions, itemsVisibles]);
 
   return hasLoaded ? (
     <>
@@ -88,7 +93,7 @@ function App() {
           setImagen={(img) => setImagen(img)}
           setHasLoaded={() => setHasLoaded}
         >
-          {dummyValues.map((dummy) => {
+          {itemsVisibles.map((dummy) => {
             return (
               dummy.mostrar && (
                 <Draggable
@@ -98,10 +103,10 @@ function App() {
                   bounds="parent"
                   defaultPosition={
                     positions === null
-                    ? {x: 0, y: 0} :
-                    !positions[dummy.id]
-                    ? {x:0, y:0} :
-                    {x: positions[dummy.id].x, y: positions[dummy.id].y}
+                      ? { x: 0, y: 0 }
+                      : !positions[dummy.id]
+                      ? { x: 0, y: 0 }
+                      : { x: positions[dummy.id].x, y: positions[dummy.id].y }
                   }
                 >
                   <Input

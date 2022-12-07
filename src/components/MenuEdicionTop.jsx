@@ -1,14 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { Button, Checkbox, Label, Menu } from "semantic-ui-react";
 import { imagenes } from "../assets/NombresImagenes";
 
 function MenuEdicionTop(props) {
-  const {
-    handleEdicion,
-    handleClickImagen,
-    verSelectorImagenes,
-    modoEdicion,
-  } = props;
+  const { handleEdicion, handleClickImagen, verSelectorImagenes, modoEdicion } =
+    props;
 
   return (
     <Menu>
