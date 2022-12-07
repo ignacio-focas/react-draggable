@@ -43,9 +43,14 @@ body{
  .container-valores .input{
   margin: 10px;
   width: 20%;
+
 }
 
 .container-valores input{
   cursor: move !important;
 }
  
+div.ui.labeled.input.react-draggable{
+  position: absolute !important;
+
+}

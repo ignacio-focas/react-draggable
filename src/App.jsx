@@ -19,15 +19,25 @@ function App() {
   const [imagen, setImagen] = useState("");
   const [color, setColor] = useState("grey");
   const [dummyValues, setDummyValues] = useState([
-    { Value: "ACTRON RAP ACC cap x20 AR/UR", Label: "Producto", id: 1 },
-    { Value: "ARE495", Label: "Lote", id: 2 },
-    { Value: "14/03/2014 11:23:19", Label: "Hora de inicio", id: 3 },
-    { Value: 186, Label: "Minutos en marcha", id: 4 },
-    { Value: 0, Label: "Estuche/min", id: 5 },
-    { Value: 54395, Label: "Estuches consumidos", id: 6 },
-    { Value: 54000, Label: "Estuches producidos", id: 7 },
-    { Value: 669, Label: "Cantidad de bultos", id: 8 },
-    { Value: 5, Label: "Cantidad de paletas", id: 9 },
+    {
+      Value: "ACTRON RAP ACC cap x20 AR/UR",
+      Label: "Producto",
+      id: 1,
+      mostrar: false,
+    },
+    { Value: "ARE495", Label: "Lote", id: 2, mostrar: false },
+    {
+      Value: "14/03/2014 11:23:19",
+      Label: "Hora de inicio",
+      id: 3,
+      mostrar: false,
+    },
+    { Value: 186, Label: "Minutos en marcha", id: 4, mostrar: false },
+    { Value: 0, Label: "Estuche/min", id: 5, mostrar: false },
+    { Value: 54395, Label: "Estuches consumidos", id: 6, mostrar: false },
+    { Value: 54000, Label: "Estuches producidos", id: 7, mostrar: false },
+    { Value: 669, Label: "Cantidad de bultos", id: 8, mostrar: false },
+    { Value: 5, Label: "Cantidad de paletas", id: 9, mostrar: false },
   ]);
 
   useEffect(() => {
@@ -59,6 +69,13 @@ function App() {
     }
   }
 
+  const toggleMostrar = (id) => {
+    const dummy = dummyValues.find((d) => d.id === id);
+    const dummyModificado = { ...dummy, mostrar: true };
+    const newValues = dummyValues.filter((d) => d.id !== id);
+    setDummyValues([...newValues, dummyModificado]);
+  };
+
   useEffect(() => {
     localStorage.setItem("positions", JSON.stringify(positions));
   }, [positions]);
@@ -77,29 +94,46 @@ function App() {
         hasLoaded={hasLoaded}
         setImagen={(img) => setImagen(img)}
         setHasLoaded={() => setHasLoaded}
-      ></ContainerImagen>
+      >
+        {dummyValues.map((dummy) => {
+          return (
+            dummy.mostrar && (
+              <Draggable
+                disabled={disableDrag}
+                key={dummy.id}
+                onStop={handleStop}
+                // defaultPosition={
+                //   positions === null
+                //     ? { x: 0, y: 0 }
+                //     : !positions[dummy.id]
+                //     ? { x: 0, y: 0 }
+                //     : { x: positions[dummy.id].x, y: positions[dummy.id].y }
+                // }
+                bounds="parent"
+              >
+                <Input
+                  id={dummy.id}
+                  label={dummy.Label}
+                  readOnly
+                  defaultValue={dummy.Value}
+                />
+              </Draggable>
+            )
+          );
+        })}
+      </ContainerImagen>
       <div className="container-valores">
         {dummyValues.map((dummy) => {
           return (
-            <Draggable
-              disabled={disableDrag}
-              key={dummy.id}
-              onStop={handleStop}
-              defaultPosition={
-                positions === null
-                  ? { x: 0, y: 0 }
-                  : !positions[dummy.id]
-                  ? { x: 0, y: 0 }
-                  : { x: positions[dummy.id].x, y: positions[dummy.id].y }
-              }
-            >
-              <Input
+            !dummy.mostrar && (
+              <Button
+                key={dummy.id}
                 id={dummy.id}
-                label={dummy.Label}
-                readOnly
-                defaultValue={dummy.Value}
+                content={dummy.Label}
+                color="teal"
+                onClick={() => toggleMostrar(dummy.id)}
               />
-            </Draggable>
+            )
           );
         })}
       </div>
