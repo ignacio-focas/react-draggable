@@ -5,6 +5,7 @@ import { Input } from "semantic-ui-react";
 import ContainerImagen from "./components/ContainerImagen";
 import MenuEdicionTop from "./components/MenuEdicionTop";
 import MenuEdicionBottom from "./components/MenuEdicionBottom";
+import Baliza from "./components/Baliza";
 
 function App() {
   const [positions, setPositions] = useState({});
@@ -87,6 +88,11 @@ function App() {
       />
 
       <div style={{ display: "flex", flexDirection: "row" }}>
+        <MenuEdicionBottom
+          modoEdicion={modoEdicion}
+          values={dummyValues}
+          handleMostrar={(id) => toggleMostrar(id)}
+        />
         <ContainerImagen
           imagen={imagen}
           hasLoaded={hasLoaded}
@@ -120,11 +126,6 @@ function App() {
             );
           })}
         </ContainerImagen>
-        <MenuEdicionBottom
-          modoEdicion={modoEdicion}
-          values={dummyValues}
-          handleMostrar={(id) => toggleMostrar(id)}
-        />
       </div>
     </>
   ) : null;
