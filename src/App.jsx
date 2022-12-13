@@ -111,15 +111,15 @@ function App() {
     }
   }
 
-  // function agregarBaliza() {
-  //   const balizaDefault = {
-  //     color: "red",
-  //     forma: "circulo",
-  //     tipo: "baliza",
-  //     id: uuid(),
-  //   };
-  //   setItemsVisibles(itemsVisibles.concat(balizaDefault));
-  // }
+  function agregarBaliza() {
+    const balizaDefault = {
+      color: "red",
+      forma: "circulo",
+      tipo: "baliza",
+      id: uuid(),
+    };
+    setItemsVisibles(itemsVisibles.concat(balizaDefault));
+  }
 
   const toggleMostrar = (id) => {
     const dummy = dummyValues.find((d) => d.id === id);
@@ -148,7 +148,7 @@ function App() {
           modoEdicion={modoEdicion}
           values={dummyValues}
           handleMostrar={(id) => toggleMostrar(id)}
-          // agregarBaliza={() => agregarBaliza()}
+          agregarBaliza={() => agregarBaliza()}
         />
         <ContainerImagen
           imagen={imagen}
@@ -157,8 +157,8 @@ function App() {
           setHasLoaded={() => setHasLoaded}
         >
           {itemsVisibles.map((dummy) => {
-            return (
-              dummy.mostrar && (
+            if (dummy.tipo === "baliza") {
+              return (
                 <Draggable
                   disabled={disableDrag}
                   key={dummy.id}
@@ -172,20 +172,38 @@ function App() {
                       : { x: positions[dummy.id].x, y: positions[dummy.id].y }
                   }
                 >
-                  <Input
-                    id={dummy.id}
-                    label={dummy.Label}
-                    readOnly
-                    defaultValue={dummy.Value}
-                  />
-                  {/* <Baliza
-                      color={dummy.color}
-                      forma={dummy.forma}
-                      key={dummy.id}
-                    /> */}
+                  <div style={{ position: "absolute" }}>
+                    <Baliza color={dummy.color} forma={dummy.forma} />
+                  </div>
                 </Draggable>
-              )
-            );
+              );
+            } else if (dummy.tipo === "input") {
+              return (
+                dummy.mostrar && (
+                  <Draggable
+                    disabled={disableDrag}
+                    key={dummy.id}
+                    onStop={handleStop}
+                    bounds="parent"
+                    defaultPosition={
+                      positions === null
+                        ? { x: 0, y: 0 }
+                        : !positions[dummy.id]
+                        ? { x: 0, y: 0 }
+                        : { x: positions[dummy.id].x, y: positions[dummy.id].y }
+                    }
+                  >
+                    <Input
+                      id={dummy.id}
+                      label={dummy.Label}
+                      readOnly
+                      defaultValue={dummy.Value}
+                    />
+                  </Draggable>
+                )
+              );
+            }
+            return null;
           })}
         </ContainerImagen>
       </div>

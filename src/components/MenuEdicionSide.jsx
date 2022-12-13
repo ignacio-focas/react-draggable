@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Button, Dropdown, Menu } from "semantic-ui-react";
 
 function MenuEdicionSide(props) {
-  const { modoEdicion, values, handleMostrar } = props;
+  const { modoEdicion, values, handleMostrar, agregarBaliza } = props;
   const [variableSeleccionada, setVariableSeleccionada] = useState("");
 
   const handleChange = (e) => {
@@ -21,9 +21,11 @@ function MenuEdicionSide(props) {
         >
           {values.map((val) => {
             return (
-              <MenuItem key={val.id} value={val.id}>
-                {val.Label}
-              </MenuItem>
+              !val.mostrar && (
+                <MenuItem key={val.id} value={val.id}>
+                  {val.Label}
+                </MenuItem>
+              )
             );
           })}
         </Select>
@@ -34,19 +36,13 @@ function MenuEdicionSide(props) {
           color="teal"
         />
         <hr />
-        {/* {values.map((dummy) => {
-          return (
-            !dummy.mostrar && (
-              <Button
-                key={dummy.id}
-                id={dummy.id}
-                content={dummy.Label}
-                color="teal"
-                onClick={() => handleMostrar(dummy.id)}
-              />
-            )
-          );
-        })} */}
+        <Button
+          content="Añadir baliza"
+          color="teal"
+          onClick={() => {
+            agregarBaliza();
+          }}
+        />
       </div>
     )
   );
