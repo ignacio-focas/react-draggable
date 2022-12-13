@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
+import { v4 as uuid } from "uuid";
 import "./App.css";
 import Draggable from "react-draggable";
 import { Input } from "semantic-ui-react";
 import ContainerImagen from "./components/ContainerImagen";
 import MenuEdicionTop from "./components/MenuEdicionTop";
-import MenuEdicionBottom from "./components/MenuEdicionBottom";
+import MenuEdicionSide from "./components/MenuEdicionSide";
 import Baliza from "./components/Baliza";
 
 function App() {
@@ -18,22 +19,67 @@ function App() {
     {
       Value: "ACTRON RAP ACC cap x20 AR/UR",
       Label: "Producto",
-      id: 1,
+      id: uuid(),
       mostrar: false,
+      tipo: "input",
     },
-    { Value: "ARE495", Label: "Lote", id: 2, mostrar: false },
+    {
+      Value: "ARE495",
+      Label: "Lote",
+      id: uuid(),
+      mostrar: false,
+      tipo: "input",
+    },
     {
       Value: "14/03/2014 11:23:19",
       Label: "Hora de inicio",
-      id: 3,
+      id: uuid(),
+
       mostrar: false,
+      tipo: "input",
     },
-    { Value: 186, Label: "Minutos en marcha", id: 4, mostrar: false },
-    { Value: 0, Label: "Estuche/min", id: 5, mostrar: false },
-    { Value: 54395, Label: "Estuches consumidos", id: 6, mostrar: false },
-    { Value: 54000, Label: "Estuches producidos", id: 7, mostrar: false },
-    { Value: 669, Label: "Cantidad de bultos", id: 8, mostrar: false },
-    { Value: 5, Label: "Cantidad de paletas", id: 9, mostrar: false },
+    {
+      Value: 186,
+      Label: "Minutos en marcha",
+      id: uuid(),
+      mostrar: false,
+      tipo: "input",
+    },
+    {
+      Value: 0,
+      Label: "Estuche/min",
+      id: uuid(),
+      mostrar: false,
+      tipo: "input",
+    },
+    {
+      Value: 54395,
+      Label: "Estuches consumidos",
+      id: uuid(),
+      mostrar: false,
+      tipo: "input",
+    },
+    {
+      Value: 54000,
+      Label: "Estuches producidos",
+      id: uuid(),
+      mostrar: false,
+      tipo: "input",
+    },
+    {
+      Value: 669,
+      Label: "Cantidad de bultos",
+      id: uuid(),
+      mostrar: false,
+      tipo: "input",
+    },
+    {
+      Value: 5,
+      Label: "Cantidad de paletas",
+      id: uuid(),
+      mostrar: false,
+      tipo: "input",
+    },
   ]);
 
   useEffect(() => {
@@ -65,6 +111,16 @@ function App() {
     }
   }
 
+  // function agregarBaliza() {
+  //   const balizaDefault = {
+  //     color: "red",
+  //     forma: "circulo",
+  //     tipo: "baliza",
+  //     id: uuid(),
+  //   };
+  //   setItemsVisibles(itemsVisibles.concat(balizaDefault));
+  // }
+
   const toggleMostrar = (id) => {
     const dummy = dummyValues.find((d) => d.id === id);
     const dummyModificado = { ...dummy, mostrar: true };
@@ -88,10 +144,11 @@ function App() {
       />
 
       <div style={{ display: "flex", flexDirection: "row" }}>
-        <MenuEdicionBottom
+        <MenuEdicionSide
           modoEdicion={modoEdicion}
           values={dummyValues}
           handleMostrar={(id) => toggleMostrar(id)}
+          // agregarBaliza={() => agregarBaliza()}
         />
         <ContainerImagen
           imagen={imagen}
@@ -121,6 +178,11 @@ function App() {
                     readOnly
                     defaultValue={dummy.Value}
                   />
+                  {/* <Baliza
+                      color={dummy.color}
+                      forma={dummy.forma}
+                      key={dummy.id}
+                    /> */}
                 </Draggable>
               )
             );
