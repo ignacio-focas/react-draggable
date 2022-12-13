@@ -53,7 +53,7 @@ function MenuEdicionSide(props) {
         <Button
           content="Añadir baliza"
           color="teal"
-          onClick={(formaBaliza) => {
+          onClick={() => {
             agregarBaliza(formaBaliza);
           }}
         />

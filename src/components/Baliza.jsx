@@ -1,10 +1,9 @@
 import React from "react";
-import { Draggable } from "react-draggable";
 
 function Baliza(props) {
   const { color, forma } = props;
 
-  let borde = forma == "circulo" ? "50%" : forma == "cuadrado" ? "0" : null;
+  let borde = forma === "circulo" ? "50%" : forma === "cuadrado" ? "0" : null;
 
   return (
     <>

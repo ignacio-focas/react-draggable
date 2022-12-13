@@ -148,7 +148,7 @@ function App() {
           modoEdicion={modoEdicion}
           values={dummyValues}
           handleMostrar={(id) => toggleMostrar(id)}
-          agregarBaliza={() => agregarBaliza()}
+          agregarBaliza={(forma) => agregarBaliza(forma)}
         />
         <ContainerImagen
           imagen={imagen}
