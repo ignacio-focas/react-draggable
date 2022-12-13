@@ -1,13 +1,18 @@
-import { InputLabel, MenuItem, Select, Stack } from "@mui/material";
+import { InputLabel, MenuItem, Select } from "@mui/material";
 import React, { useState } from "react";
-import { Button, Dropdown, Menu } from "semantic-ui-react";
+import { Button } from "semantic-ui-react";
 
 function MenuEdicionSide(props) {
   const { modoEdicion, values, handleMostrar, agregarBaliza } = props;
   const [variableSeleccionada, setVariableSeleccionada] = useState("");
+  const [formaBaliza, setFormaBaliza] = useState("circulo");
 
   const handleChange = (e) => {
     setVariableSeleccionada(e.target.value);
+  };
+
+  const handleFormaChange = (e) => {
+    setFormaBaliza(e.target.value);
   };
 
   return (
@@ -36,11 +41,20 @@ function MenuEdicionSide(props) {
           color="teal"
         />
         <hr />
+        <InputLabel id="baliza">Editar baliza</InputLabel>
+        <Select
+          value={formaBaliza}
+          labelId="baliza"
+          onChange={handleFormaChange}
+        >
+          <MenuItem value="circulo">Circulo</MenuItem>
+          <MenuItem value="cuadrado">Cuadrado</MenuItem>
+        </Select>
         <Button
           content="Añadir baliza"
           color="teal"
-          onClick={() => {
-            agregarBaliza();
+          onClick={(formaBaliza) => {
+            agregarBaliza(formaBaliza);
           }}
         />
       </div>

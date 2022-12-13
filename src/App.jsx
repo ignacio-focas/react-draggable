@@ -111,10 +111,10 @@ function App() {
     }
   }
 
-  function agregarBaliza() {
+  function agregarBaliza(forma) {
     const balizaDefault = {
       color: "red",
-      forma: "circulo",
+      forma: forma,
       tipo: "baliza",
       id: uuid(),
     };
