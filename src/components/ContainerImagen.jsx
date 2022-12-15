@@ -4,6 +4,7 @@ import Comprimidora from "./svgComponents/Comprimidora";
 import Envolvedora from "./svgComponents/Envolvedora";
 import Entubadora from "./svgComponents/Entubadora";
 import Estuchadora from "./svgComponents/Estuchadora";
+import { Box } from "@mui/material";
 
 function ContainerImagen(props) {
   const { imagen, children, setImagen, setHasLoaded } = props;
@@ -36,10 +37,10 @@ function ContainerImagen(props) {
   };
 
   return (
-    <div className="container-imagen">
+    <Box className="container-imagen">
       {selectorImagen(imagen)}
       {children}
-    </div>
+    </Box>
   );
 }
 
