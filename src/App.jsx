@@ -113,7 +113,7 @@ function App() {
 
   function agregarBaliza(forma) {
     const balizaDefault = {
-      color: "red",
+      estado: true,
       forma: forma,
       tipo: "baliza",
       id: uuid(),
@@ -173,7 +173,7 @@ function App() {
                   }
                 >
                   <div style={{ position: "absolute" }}>
-                    <Baliza color={dummy.color} forma={dummy.forma} />
+                    <Baliza estado={dummy.estado} forma={dummy.forma} />
                   </div>
                 </Draggable>
               );

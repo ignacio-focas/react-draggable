@@ -47,8 +47,8 @@ function MenuEdicionSide(props) {
           labelId="baliza"
           onChange={handleFormaChange}
         >
-          <MenuItem value="circulo">Circulo</MenuItem>
-          <MenuItem value="cuadrado">Cuadrado</MenuItem>
+          <MenuItem value="circulo">Circular</MenuItem>
+          <MenuItem value="cuadrado">Cuadrada</MenuItem>
         </Select>
         <Button
           content="Añadir baliza"
